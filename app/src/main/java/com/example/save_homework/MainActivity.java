@@ -16,10 +16,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText saveText;
-    TextView listText;
     RecyclerView recyclerView;
     MainAdapter adapter;
+    EditText saveText;
     ArrayList<String> list;
 
     @Override
@@ -31,13 +30,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new MainAdapter();
         recyclerView.setAdapter(adapter);
 
-
         saveText = findViewById(R.id.ET_search);
-        saveText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
         saveText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
