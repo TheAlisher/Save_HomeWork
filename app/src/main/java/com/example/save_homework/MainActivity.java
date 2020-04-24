@@ -31,13 +31,11 @@ public class MainActivity extends AppCompatActivity {
         adapter = new MainAdapter();
         recyclerView.setAdapter(adapter);
 
+
         saveText = findViewById(R.id.ET_search);
         saveText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String history = saveText.getText().toString();
-                list.add(0, history);
-                adapter.update(list);
             }
         });
         saveText.addTextChangedListener(new TextWatcher() {
@@ -48,13 +46,34 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                listText = findViewById(R.id.list);
-                listText.setText(s);
+                /*listText = findViewById(R.id.list);
+                listText.setText(s);*/
+                s = s.toString().toLowerCase();
+                ArrayList<String> arrayList = new ArrayList<>();
+                for (int i = 0; i <list.size() ; i++) {
+                    String text = list.get(i).toLowerCase();
+                    if (text.contains(s)){
+                        arrayList.add(list.get(i));
+                    }
+                }
+                adapter.update(arrayList);
+                adapter.notifyDataSetChanged();
             }
 
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+
+        list = new ArrayList<>();
+        Button save = findViewById(R.id.button_save);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String info = saveText.getText().toString();
+                list.add(0, info);
+                adapter.update(list);
             }
         });
     }
